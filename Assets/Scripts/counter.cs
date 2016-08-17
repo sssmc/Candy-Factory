@@ -9,10 +9,18 @@ public class counter : MonoBehaviour {
 	public GameObject candySpeedTextObject;
 	private Text candySpeedText;
 	public float candy = 0f;
+	public int ticksPerSecond;
+	public float candyPrice;
+	private money moneyScript;
 
-	private void textCounter(){
+	private void tick()
+	{
+		Debug.Log ("tick");
+		candy += candySpeed / ticksPerSecond;
 		candyText.GetComponent<Text> ().text = ""+getCandyDisplayNum(candy);
-		candy += candySpeed / 100;
+		candySpeedText.text = Mathf.Round (candySpeed) + " Per Second ";
+
+		moneyScript.addMoney (candyPrice * (candySpeed / ticksPerSecond));
 	}
 
 	private string getCandyDisplayNum(float candy)
@@ -39,16 +47,16 @@ public class counter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		moneyScript = GetComponent<money> ();
+
 		candySpeedText = candySpeedTextObject.GetComponent<Text> ();
-		candySpeedText.text = Mathf.Round (candySpeed) + " Per Second ";
-		InvokeRepeating("textCounter", 0.01f, 0.01f);
+		InvokeRepeating("tick", 1.0f/ticksPerSecond, 1.0f/ticksPerSecond);
 	
 	}
 
-	public void changeCandySpeed (float newSpeed){
+	public void sliderChangeCandySpeed (float newSpeed){
 
-		candySpeed = newSpeed * 1000f;
-		candySpeedText.text = Mathf.Round (candySpeed) + " Per Second ";
+		candySpeed = newSpeed;
 
 	}
 }
