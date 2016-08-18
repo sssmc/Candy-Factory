@@ -15,7 +15,6 @@ public class counter : MonoBehaviour {
 
 	private void tick()
 	{
-		Debug.Log ("tick");
 		candy += candySpeed / ticksPerSecond;
 		candyText.GetComponent<Text> ().text = ""+getCandyDisplayNum(candy);
 		candySpeedText.text = Mathf.Round (candySpeed) + " Per Second ";
