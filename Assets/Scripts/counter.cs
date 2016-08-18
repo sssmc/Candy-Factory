@@ -30,15 +30,23 @@ public class counter : MonoBehaviour {
 
 		if (candy < 10000) {
 			newCandy = Mathf.Round(candy);
-			newCandyString = newCandy.ToString();
-		} else if (candy > 9999 && candy < 1000000) {
+			newCandyString = newCandy.ToString()+"\nCandies";
+		} 
+		else if (candy >= 10000 && candy < 1000000) {
 			newCandy = Mathf.Round((candy / 1000)*10) / 10;
-			newCandyString = newCandy.ToString()+" Thousand";
+			newCandyString = newCandy.ToString()+"\nThousand\nCandies";
 
 		} 
+
+		else if (candy >= 1000000 && candy < 1000000000) {
+			newCandy = Mathf.Round((candy / 100000)*10) / 10;
+			newCandyString = newCandy.ToString()+"\nMillion\nCandies";
+			
+		} 
+
 		else {
 			newCandy = Mathf.Round(candy);
-			newCandyString = newCandy.ToString();
+			newCandyString = newCandy.ToString()+"\nCandies";
 		}
 		return newCandyString;
 	}
