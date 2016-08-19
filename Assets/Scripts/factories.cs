@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class factories : MonoBehaviour {
 
-	List<Factory> Factories = new List<Factory>();
+	public List<Factory> Factories = new List<Factory>();
 	List<GameObject> factoryButtons = new List<GameObject> ();
 	public int currentFactory = 0;
 	public GameObject factoryNameTextObject;
+	public GameObject factorySpeedTextObject;
+	public GameObject factoryCandyMadeTextObject;
 	public GameObject factroyButtonPrefab;
 	public GameObject factoriesPanel;
 	public GameObject canvas;
@@ -25,7 +27,7 @@ public class factories : MonoBehaviour {
 		addFactory ("default", 0);
 		addFactory ("new Factory", 1);
 
-		factoryNameTextObject.GetComponent<Text> ().text = Factories [currentFactory].getName ();
+		updateFactory (currentFactory);
 
 	}
 
@@ -46,7 +48,13 @@ public class factories : MonoBehaviour {
 		Factories [currentFactory].deactivate ();
 		currentFactory = index;
 		Factories [currentFactory].activate ();
-		factoryNameTextObject.GetComponent<Text> ().text = Factories [currentFactory].getName ();
+		updateFactory(currentFactory);
+	}
+	public void updateFactory(int index)
+	{
+		factoryNameTextObject.GetComponent<Text> ().text = Factories [index].getName ();
+		factorySpeedTextObject.GetComponent<Text> ().text = Mathf.Round(Factories [index].candySpeed)+" Candy Per Second";
+		factoryCandyMadeTextObject.GetComponent<Text> ().text = Mathf.Round(Factories [index].candyMade)+" Candies Made";
 	}
 }
 
@@ -55,9 +63,15 @@ public class Factory{
 	private string name;
 	private GameObject button;
 	public GameObject panel;
+	public float candySpeed;
+	public float moneySpeed;
+	public float moneyMade;
+	public float candyMade;
 	public Factory(string newName, GameObject newButton, GameObject canvas, GameObject factoryPanelPrefab)
 	{
 		name = newName;
+		candySpeed = 1f;
+		moneySpeed = 1f;
 		button = newButton;
 		button.transform.GetChild (0).GetComponent<Text> ().text = name;
 		button.GetComponent<Button> ().interactable = true;
