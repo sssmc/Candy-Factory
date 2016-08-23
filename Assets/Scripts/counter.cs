@@ -14,7 +14,7 @@ public class counter : MonoBehaviour {
 	public int ticksPerSecond;
 	public float candyPrice;
 	private money moneyScript;
-	private factories factoriesScript;
+	private regions regionsScript;
 
 	private void tick()
 	{
@@ -26,7 +26,7 @@ public class counter : MonoBehaviour {
 
 		moneyScript.addMoney (moneySpeed);
 
-		factoriesScript.updateFactory (factoriesScript.currentFactory);
+		regionsScript.updateRegion (regionsScript.currentRegion);
 
 	}
 
@@ -34,7 +34,7 @@ public class counter : MonoBehaviour {
 	{
 		float totalCandySpeed = 0;
 		float totalMoneySpeed = 0;
-		foreach (Factory factory in GetComponent<factories>().Factories) 
+		foreach (Region factory in GetComponent<regions>().Regions) 
 		{
 			totalCandySpeed += factory.candySpeed;
 			totalMoneySpeed += factory.moneySpeed;
@@ -77,7 +77,7 @@ public class counter : MonoBehaviour {
 	void Start () {
 
 		moneyScript = GetComponent<money> ();
-		factoriesScript = GetComponent<factories> ();
+		regionsScript = GetComponent<regions> ();
 
 		candySpeedText = candySpeedTextObject.GetComponent<Text> ();
 		InvokeRepeating("tick", 1.0f/ticksPerSecond, 1.0f/ticksPerSecond);
