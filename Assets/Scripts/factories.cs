@@ -36,8 +36,9 @@ public class factories : MonoBehaviour {
 		Factories.Add(new Factory(name,factoryButtons[0], canvas, factoryPanelPrefab));
 		Factories [index].panel = Instantiate (factoryPanelPrefab);
 		Factories [index].panel.transform.parent = canvas.transform;
-		Factories [index].panel.GetComponent<RectTransform> ().localPosition = new Vector2(0,-47);
-		Factories [index].panel.GetComponent<RectTransform>().sizeDelta = new Vector2(549,388);
+		Factories [index].panel.GetComponent<RectTransform> ().localPosition = new Vector2(0,0);
+		Factories [index].panel.GetComponent<RectTransform>().sizeDelta = new Vector2(0,0);
+		Factories [index].panel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 		Factories [index].activate ();
 		factoryButtons.RemoveAt (0);
 		setCurrentFactory (index);
